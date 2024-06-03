@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 
 export default function Home() {
   const [item, setItem] = useState('');
   const [items, setItems] = useState([]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setItem(e.target.value);
   };
 
