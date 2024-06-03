@@ -1,44 +1,50 @@
 "use client"
 
-
-import { useState } from "react";
-
+import { useState } from 'react';
 
 export default function Home() {
-  const [number, setNumber] = useState(0);
+  const [item, setItem] = useState('');
+  const [items, setItems] = useState([]);
 
-  const add = () => {
-    setNumber(number + 1);
+  const handleInputChange = (e) => {
+    setItem(e.target.value);
   };
 
-  const subtract = () => {
-    if (number > 0) {
-      setNumber(number - 1);
-    }
+  const handleAddItem = () => {
+  if (item.trim())
+    setItems([...items, item]);
+    setItem('');
   };
+
+
+ 
 
   return (
-    <div className="bg-black-100 flex items-center justify-center min-h-screen">
-      <div className="container mx-auto p-4">
-        <div className="flex items-center justify-center space-x-4">
+    <div className="container mx-auto p-4">
+      <div className="flex flex-col items-center">
+        <div className="flex space-x-2 mb-4">
+          <input
+            type="text"
+            value={item}
+            onChange={handleInputChange}
+            className="px-4 py-2 border text-black rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+            placeholder='Yeet and skeet'
+          />
           <button
-            onClick={subtract}
-            className="bg-red-500 text-white rounded-full h-12 w-12 flex items-center justify-center text-2xl"
+            onClick={handleAddItem}
+            className="px-4 py-2 bg-blue-500 text-black rounded-md hover:bg-blue-600"
           >
-            -
-          </button>
-          <div className="text-4xl font-bold">{number}</div>
-          <button
-            onClick={add}
-            className="bg-green-500 text-white rounded-full h-12 w-12 flex items-center justify-center text-2xl"
-          >
-            +
+            Add
           </button>
         </div>
+        <ul className="list-disc bg-transparent">
+          {items.map((item, index) => (
+            <li key={index} className="mt-2">
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
-
-
-
